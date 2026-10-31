@@ -63,9 +63,9 @@
   "sameAs": [
     "https://www.ebay.com/usr/unsealedanddelivered",
     "https://www.instagram.com/unsealedanddeliveredco/",
-    "https://www.facebook.com/profile.php?id=1317792848073281",
+    "https://www.facebook.com/UnsealedAndDeliveredCo",
     "https://www.tiktok.com/@unsealedanddeliveredco",
-    "https://www.youtube.com/@HobbyCollectiblesUSALLC",
+    "https://www.youtube.com/@unsealedanddeliveredco",
     "https://discord.gg/NfB9q9K9fA"
   ]
 }
@@ -119,22 +119,22 @@
 
 <header class="site-header">
   <nav class="nav container">
-    <a href="index.html" class="brand">
+    <a class='brand' href='/'>
       <img src="images/logo-icon.webp" width="100" height="100" alt="Unsealed & Delivered Co. logo">
       <span class="brand-name">Un<span class="accent-s">s</span>ealed & Delivered<span class="sub">Co. &mdash; Plantation, FL</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="shop.html">Shop</a></li>
-      <li><a href="trading-card-games.html">Trading Card Games</a></li>
-      <li><a href="goat-slabs.html">GOAT SLABS</a></li>
-      <li><a href="sell.html" class="active">Sell to Us</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="curbside.html">Curbside Pickup</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href='/'>Home</a></li>
+      <li><a href='/shop.html'>Shop</a></li>
+      <li><a href='/trading-card-games.html'>Trading Card Games</a></li>
+      <li><a href='/goat-slabs.html'>GOAT SLABS</a></li>
+      <li><a class='active' href='/sell.html'>Sell to Us</a></li>
+      <li><a href='/about.html'>About</a></li>
+      <li><a href='/curbside.html'>Curbside Pickup</a></li>
+      <li><a href='/contact.html'>Contact</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="contact.html" class="btn btn-primary">Visit the Shop</a>
+      <a class='btn btn-primary' href='/contact.html'>Visit the Shop</a>
       <button class="nav-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -146,7 +146,7 @@
 
   <section class="page-hero">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html">Home</a> / <span>Sell to Us</span></div>
+      <div class="breadcrumb"><a href='/'>Home</a> / <span>Sell to Us</span></div>
       <h1>We're Buying.</h1>
       <p>Sealed product and collections &mdash; Pok&eacute;mon, sports, One Piece, and Disney Lorcana. Tell us what you have and your asking price. We decide fast.</p>
       <div class="hero-actions" style="margin-top: 22px; margin-bottom: 0;">
@@ -243,12 +243,79 @@
         <p>Give us the details and your asking price &mdash; we'll take a look and get back to you fast.</p>
       </div>
       <div style="max-width: 760px; margin: 0 auto;">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfXqP7pj1n82TGFz3bd1FVCPeVH9nSn4CVDHtPhFD1juNB5JQ/viewform?embedded=true" width="100%" height="1400" frameborder="0" marginheight="0" marginwidth="0" loading="lazy" title="Sell to Us — Tell Us What You Have">Loading&hellip;</iframe>
-        <p style="text-align:center; color:var(--grey); margin-top: 18px;">
-          Form not loading? Open it here:
-          <br>
-          <a href="https://forms.gle/SRm4vGJ8KHpG6tfz6" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top: 10px;">Sell to us Now</a>
-        </p>
+        <div class="contact-form" style="text-align: left;">
+          <div class="form-success" id="sell-success" hidden>
+            <strong>Got it &mdash; thanks!</strong> Your list is with the shop. We review every submission ourselves and typically reply within a day or two. Need us faster? Call or text <a href="tel:+17542740908">(754) 274-0908</a>.
+          </div>
+          <!-- Sell intake form. Netlify Forms wiring lives on the <form> tag only (data-netlify + form-name);
+               on a host move, swap this tag to a Formspree action endpoint (2 lines) and nothing else changes. -->
+          <form name="sell-intake" id="sell-intake-form" method="POST" action="/sell.html?submitted=1" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="sell-intake">
+            <p hidden><label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field"></label></p>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sell-name">Your name *</label>
+                <input type="text" id="sell-name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="sell-shop">Shop or business name (if any)</label>
+                <input type="text" id="sell-shop" name="shop_or_business" placeholder="Shop or business name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sell-email">Best email to reach you *</label>
+                <input type="email" id="sell-email" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="sell-phone">Phone (optional)</label>
+                <input type="tel" id="sell-phone" name="phone" placeholder="(555) 555-5555">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sell-what">What are you selling? *</label>
+              <input type="text" id="sell-what" name="what_are_you_selling" placeholder="e.g. Sealed Pok&eacute;mon booster boxes, a sports card collection" required>
+            </div>
+            <div class="form-group">
+              <label for="sell-details">Details: product, quantities, condition *</label>
+              <textarea id="sell-details" name="details" placeholder="Sets, quantities, condition &mdash; the more detail, the faster we can price it" required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sell-price">Your asking price *</label>
+                <input type="text" id="sell-price" name="asking_price" placeholder="Your asking price" required>
+              </div>
+              <div class="form-group">
+                <label for="sell-fulfil">Pickup or shipping?</label>
+                <select id="sell-fulfil" name="pickup_or_shipping">
+                  <option>Local pickup / drop-off at the shop</option>
+                  <option>I can ship it</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sell-photos">Photos</label>
+              <input type="text" id="sell-photos" name="photos" placeholder="Paste a photo link (Google Drive, Imgur&hellip;) if you have one">
+              <p class="form-note" style="text-align: left; margin-top: 2px;">No link handy? No problem &mdash; submit the form and we&rsquo;ll text you to swap photos.</p>
+            </div>
+            <div class="form-group">
+              <label for="sell-notes">Anything else we should know?</label>
+              <textarea id="sell-notes" name="anything_else" placeholder="Anything else we should know?" style="min-height: 80px;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send It to the Shop</button>
+            <p class="form-note">We review every submission ourselves and typically reply within a day or two.</p>
+          </form>
+        </div>
+        <div class="talk-line">
+          <p><strong>Prefer to talk first?</strong> Reach us any of these ways:</p>
+          <div class="talk-links">
+            <a class="talk-link" href="tel:+17542740908"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> Call (754) 274-0908</a>
+            <a class="talk-link" href="https://wa.me/17542740908?text=Hi!%20I%20have%20sealed%20product%20to%20sell" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp</a>
+            <a class="talk-link" href="https://discord.gg/NfB9q9K9fA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg> Discord</a>
+            <a class="talk-link" href="mailto:unsealedanddeliveredco@gmail.com"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Email</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -298,41 +365,42 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand">
+        <a class='brand' href='/'>
           <img src="images/logo-icon.webp" width="100" height="100" alt="Unsealed & Delivered Co. logo">
           <span class="brand-name">Un<span class="accent-s">s</span>ealed & Delivered<span class="sub">Co.</span></span>
         </a>
         <p>A family-owned hobby &amp; collectibles shop in Plantation, FL &mdash; TCG, sports cards, and toys for collectors of every age.</p>
         <div class="social-icons">
-          <a href="https://www.ebay.com/usr/unsealedanddelivered" target="_blank" rel="noopener" aria-label="eBay" title="eBay">🛒</a>
-          <a href="https://www.instagram.com/unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">📸</a>
-          <a href="https://www.facebook.com/profile.php?id=1317792848073281" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">📘</a>
-          <a href="https://www.tiktok.com/@unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">🎵</a>
-          <a href="https://www.youtube.com/@HobbyCollectiblesUSALLC" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">▶️</a>
-          <a href="https://discord.gg/NfB9q9K9fA" target="_blank" rel="noopener" aria-label="Discord" title="Discord">💬</a>
+          <a href="https://www.ebay.com/usr/unsealedanddelivered" target="_blank" rel="noopener" aria-label="eBay" title="eBay"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.056 12.132v-4.92h1.2v3.026c.59-.703 1.402-.906 2.202-.906 1.34 0 2.828.904 2.828 2.855 0 .233-.015.457-.06.668.24-.953 1.274-1.305 2.896-1.344.51-.018 1.095-.018 1.56-.018v-.135c0-.885-.556-1.244-1.53-1.244-.72 0-1.245.3-1.305.81h-1.275c.136-1.29 1.5-1.62 2.686-1.62 1.064 0 1.995.27 2.415 1.02l-.436-.84h1.41l2.055 4.125 2.055-4.126H24l-3.72 7.305h-1.346l1.07-2.04-2.33-4.38c.13.255.2.555.2.93v2.46c0 .346.01.69.04 1.005H16.8a6.543 6.543 0 01-.046-.765c-.603.734-1.32.96-2.32.96-1.48 0-2.272-.78-2.272-1.695 0-.15.015-.284.037-.405-.3 1.246-1.36 2.086-2.767 2.086-.87 0-1.694-.315-2.2-.93 0 .24-.015.494-.04.734h-1.18c.02-.39.04-.855.04-1.245v-1.05h-4.83c.065 1.095.818 1.74 1.853 1.74.718 0 1.355-.3 1.568-.93h1.24c-.24 1.29-1.61 1.725-2.79 1.725C.95 15.009 0 13.822 0 12.232c0-1.754.982-2.91 3.116-2.91 1.688 0 2.93.886 2.94 2.806v.005zm9.137.183c-1.095.034-1.77.233-1.77.95 0 .465.36.97 1.305.97 1.26 0 1.935-.69 1.935-1.814v-.13c-.45 0-.99.006-1.484.022h.012zm-6.06 1.875c1.11 0 1.876-.806 1.876-2.02s-.768-2.02-1.893-2.02c-1.11 0-1.89.806-1.89 2.02s.765 2.02 1.875 2.02h.03zm-4.35-2.514c-.044-1.125-.854-1.546-1.725-1.546-.944 0-1.694.474-1.815 1.546z"/></svg></a>
+          <a href="https://www.instagram.com/unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+          <a href="https://www.facebook.com/UnsealedAndDeliveredCo" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+          <a href="https://www.tiktok.com/@unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.youtube.com/@unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://www.threads.com/@unsealedanddeliveredco" target="_blank" rel="noopener" aria-label="Threads" title="Threads"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg></a>
+          <a href="https://discord.gg/NfB9q9K9fA" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
         </div>
       </div>
       <div class="footer-col">
         <p class="footer-col-title">Explore</p>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="trading-card-games.html">Trading Card Games</a></li>
-          <li><a href="goat-slabs.html">GOAT SLABS</a></li>
-          <li><a href="sell.html">Sell to Us</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="curbside.html">Curbside Pickup</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href='/'>Home</a></li>
+          <li><a href='/shop.html'>Shop</a></li>
+          <li><a href='/trading-card-games.html'>Trading Card Games</a></li>
+          <li><a href='/goat-slabs.html'>GOAT SLABS</a></li>
+          <li><a href='/sell.html'>Sell to Us</a></li>
+          <li><a href='/about.html'>About</a></li>
+          <li><a href='/curbside.html'>Curbside Pickup</a></li>
+          <li><a href='/contact.html'>Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <p class="footer-col-title">Shop</p>
         <ul>
-          <li><a href="pokemon-tcg.html">Pok&eacute;mon TCG</a></li>
-          <li><a href="one-piece-tcg.html">One Piece TCG</a></li>
-          <li><a href="sports-cards.html">Sports Cards</a></li>
-          <li><a href="toys-collectibles.html">Toys &amp; Collectibles</a></li>
-          <li><a href="disney-lorcana.html">Disney Lorcana</a></li>
+          <li><a href='/pokemon-tcg.html'>Pok&eacute;mon TCG</a></li>
+          <li><a href='/one-piece-tcg.html'>One Piece TCG</a></li>
+          <li><a href='/sports-cards.html'>Sports Cards</a></li>
+          <li><a href='/toys-collectibles.html'>Toys &amp; Collectibles</a></li>
+          <li><a href='/disney-lorcana.html'>Disney Lorcana</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -388,5 +456,27 @@
   formspree('initForm', { formElement: '#signup-form', formId: 'mvkopojq' });
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+<!-- Sell form: inline success state (progressive enhancement — plain POST still works without JS) -->
+<script>
+  (function () {
+    var form = document.getElementById('sell-intake-form');
+    var success = document.getElementById('sell-success');
+    function showSuccess() {
+      if (form) form.hidden = true;
+      if (success) { success.hidden = false; success.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    }
+    if (window.location.search.indexOf('submitted=1') !== -1) showSuccess();
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var body = new URLSearchParams(new FormData(form)).toString();
+        fetch(window.location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+          .then(function () { window.history.replaceState(null, '', window.location.pathname + '?submitted=1'); showSuccess(); })
+          .catch(function () { form.submit(); });
+      });
+    }
+  })();
+</script>
 </body>
 </html>
