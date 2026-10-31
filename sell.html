@@ -247,10 +247,10 @@
           <div class="form-success" id="sell-success" hidden>
             <strong>Got it &mdash; thanks!</strong> Your list is with the shop. We review every submission ourselves and typically reply within a day or two. Need us faster? Call or text <a href="tel:+17542740908">(754) 274-0908</a>.
           </div>
-          <!-- Sell intake form. Netlify Forms wiring lives on the <form> tag only (data-netlify + form-name);
-               on a host move, swap this tag to a Formspree action endpoint (2 lines) and nothing else changes. -->
-          <form name="sell-intake" id="sell-intake-form" method="POST" action="/sell.html?submitted=1" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="sell-intake">
+          <!-- Sell intake form. Wired to Formspree form "Sell Intake" (endpoint xqppdnyq) on 2026-10-31.
+               At DNS cutover to unsealeddelivered.com, update the _next value's domain to match. -->
+          <form name="sell-intake" id="sell-intake-form" method="POST" action="https://formspree.io/f/xqppdnyq">
+            <input type="hidden" name="_next" value="https://unsealeddelivered.github.io/sell.html?submitted=1">
             <p hidden><label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field"></label></p>
             <div class="form-row">
               <div class="form-group">
