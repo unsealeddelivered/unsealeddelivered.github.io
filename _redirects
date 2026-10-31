@@ -1,0 +1,20 @@
+# Force one canonical URL per page (the .html version — matches every
+# canonical tag, the sitemap, and every internal link on this site).
+# Netlify serves .html files at their extensionless path automatically
+# regardless of the "Pretty URLs" toggle, which was creating duplicate
+# URLs for the same page (e.g. /contact and /contact.html both resolving)
+# and tripping Search Console's "Page with redirect" indexing warning.
+# These forced 301s make the extensionless path redirect to the .html
+# canonical instead of silently serving duplicate content.
+/sell                 /sell.html                  301!
+/contact              /contact.html               301!
+/shop                 /shop.html                  301!
+/about                /about.html                 301!
+/curbside             /curbside.html              301!
+/pokemon-tcg          /pokemon-tcg.html           301!
+/one-piece-tcg        /one-piece-tcg.html         301!
+/sports-cards         /sports-cards.html          301!
+/toys-collectibles    /toys-collectibles.html     301!
+/disney-lorcana       /disney-lorcana.html        301!
+/goat-slabs           /goat-slabs.html            301!
+/trading-card-games   /trading-card-games.html    301!

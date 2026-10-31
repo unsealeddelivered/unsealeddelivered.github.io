@@ -1,0 +1,9 @@
+# Long-cache static image assets (filenames aren't content-hashed, so
+# CSS/JS are deliberately left out of this rule — recompress/rename them
+# if their content ever changes). HTML stays on Netlify's default
+# must-revalidate so page edits go out immediately.
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/images/products/*
+  Cache-Control: public, max-age=2592000
