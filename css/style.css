@@ -532,6 +532,7 @@ body.has-sticky-cta .whatsapp-float {
 
 .hero-visual .glow-card img {
   width: 100%;
+  height: auto;
   border-radius: 20px;
 }
 
@@ -774,6 +775,7 @@ a.badge-float:hover {
 
 .split-visual img {
   max-width: 220px;
+  height: auto;
 }
 
 .split-text h2 {
@@ -2357,4 +2359,107 @@ body.modal-open {
   .section { padding: 64px 0; }
   .hero-meta { gap: 22px; }
   .features { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+   2026-10-31 PATCH — mobile header fit, SVG social icons,
+   destination directory + sell-page contact routes.
+   ================================================================ */
+
+/* Brand SVG icons inside the existing circular social buttons */
+.social-icons a { color: var(--grey-light); }
+.social-icons a svg { width: 22px; height: 22px; fill: currentColor; display: block; }
+.footer-brand .social-icons a svg,
+.footer-bottom .social-icons a svg { width: 18px; height: 18px; }
+.social-icons a:focus-visible {
+  transform: translateY(-4px);
+  background: var(--gradient-brand);
+  color: var(--navy-deep);
+  outline: 2px solid var(--blue-light);
+  outline-offset: 2px;
+}
+
+/* Contact page destination directory */
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 34px;
+  text-align: left;
+}
+.dest-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.dest-card:hover { border-color: rgba(255, 157, 71, 0.55); transform: translateY(-2px); }
+.dest-ic {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--navy-soft);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--grey-light);
+}
+.dest-ic svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.dest-tx strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--white);
+  line-height: 1.25;
+}
+.dest-tx span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--grey);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) { .dest-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .dest-grid { grid-template-columns: 1fr; } }
+
+/* Sell page: "Prefer to talk first?" routes under the form */
+.talk-line { text-align: center; margin-top: 28px; color: var(--grey-light); }
+.talk-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 12px; }
+.talk-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--white);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.talk-link:hover { border-color: var(--orange); transform: translateY(-2px); }
+.talk-link svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+
+/* Mobile header: at phone widths the brand block, CTA pill and hamburger
+   must share one row with no overlap and the tagline on a single line. */
+@media (max-width: 560px) {
+  .nav { padding: 10px 14px; gap: 8px; }
+  .site-header .brand { gap: 9px; min-width: 0; }
+  .site-header .brand img { width: 34px; height: 34px; }
+  .site-header .brand-name { font-size: 0.95rem; line-height: 1.12; }
+  .site-header .brand-name .sub {
+    font-size: 0.52rem;
+    letter-spacing: 0.05em;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+  .nav-cta { gap: 8px; flex-shrink: 0; }
+  .nav-cta .btn { padding: 9px 13px; font-size: 0.78rem; white-space: nowrap; }
+  .nav-toggle { width: 38px; height: 38px; flex-shrink: 0; }
 }
