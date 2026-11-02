@@ -18,11 +18,11 @@ const CATEGORY_LABELS = {
 };
 
 const CATEGORY_ICONS = {
-  pokemon: "🎴",
-  onepiece: "🏴‍☠️",
-  sports: "⚾",
-  toys: "🧸",
-  lorcana: "🔮",
+  pokemon: '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-pokemon"></use></svg>',
+  onepiece: '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-onepiece"></use></svg>',
+  sports: '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-sports"></use></svg>',
+  toys: '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-toys"></use></svg>',
+  lorcana: '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-lorcana"></use></svg>',
 };
 
 function stockStatus(qty) {
@@ -111,7 +111,7 @@ function displayStatus(item) {
 
 function productCard(item, index) {
   const status = displayStatus(item);
-  const icon = CATEGORY_ICONS[item.category] || "📦";
+  const icon = CATEGORY_ICONS[item.category] || '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-box"></use></svg>';
   const releaseLine = item.comingSoon && item.releaseDate
     ? `<span class="product-release-date">Releases ${item.releaseDate}</span>`
     : "";
@@ -125,7 +125,7 @@ function productCard(item, index) {
         <span class="product-category">${CATEGORY_LABELS[item.category]}</span>
         <h3 class="product-name">${item.name}</h3>
         ${releaseLine}
-        <a class="product-price" href="${productTextLink(item)}" onclick="event.stopPropagation();">&#128172; Text Us &mdash; Price &amp; Stock</a>
+        <a class="product-price" href="${productTextLink(item)}" onclick="event.stopPropagation();"><svg class="uic uic-inline" aria-hidden="true" focusable="false"><use href="#ic-chat"></use></svg> Text Us &mdash; Price &amp; Stock</a>
       </div>
     </div>`;
 }
@@ -146,7 +146,7 @@ function openProductModal(index, opts) {
   if (!item || !modal) return;
 
   const status = displayStatus(item);
-  const icon = CATEGORY_ICONS[item.category] || "📦";
+  const icon = CATEGORY_ICONS[item.category] || '<svg class="uic uic-fallback" aria-hidden="true" focusable="false"><use href="#ic-box"></use></svg>';
 
   modal.querySelector(".modal-photo").innerHTML = photoMarkup(item, icon);
   modal.querySelector(".modal-category").textContent = CATEGORY_LABELS[item.category];
