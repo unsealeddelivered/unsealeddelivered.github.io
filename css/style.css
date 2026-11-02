@@ -2463,3 +2463,239 @@ body.modal-open {
   .nav-cta .btn { padding: 9px 13px; font-size: 0.78rem; white-space: nowrap; }
   .nav-toggle { width: 38px; height: 38px; flex-shrink: 0; }
 }
+
+/* ================================================================
+   2026-11-02 IMPROVEMENT PATCH — brand-colour socials, custom
+   brand icon set, whole-card click targets, tightened cards,
+   Friday game-night rotation. Live Netlify site untouched; this
+   ships on the GitHub Pages staging copy only.
+   ================================================================ */
+
+/* ---------- 1. Social buttons in real brand colours ---------- */
+
+.soc-instagram { --soc-bg: linear-gradient(45deg, #feda75 0%, #fa7e1e 30%, #d62976 60%, #962fbf 86%, #4f5bd5 100%); }
+.soc-facebook  { --soc-bg: #1877f2; }
+.soc-youtube   { --soc-bg: #ff0000; }
+.soc-tiktok    { --soc-bg: #010101; }
+.soc-discord   { --soc-bg: #5865f2; }
+.soc-ebay      { --soc-bg: #0064d2; }
+.soc-threads   { --soc-bg: #ffffff; }
+.soc-whatsapp  { --soc-bg: #25d366; }
+
+.social-icons a.soc {
+  background: var(--soc-bg);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.social-icons a.soc:hover,
+.social-icons a.soc:focus-visible {
+  background: var(--soc-bg);
+  color: var(--white);
+  filter: brightness(1.13) saturate(1.05);
+  outline: none;
+}
+.social-icons a.soc-threads { color: #0a0a0a; }
+.social-icons a.soc-threads:hover,
+.social-icons a.soc-threads:focus-visible { color: #0a0a0a; }
+
+/* Bigger, more prominent social buttons everywhere */
+.social-icons { gap: 14px; }
+.social-icons a { width: 56px; height: 56px; }
+.social-icons a svg { width: 26px; height: 26px; }
+.footer-brand .social-icons a { width: 46px; height: 46px; }
+.footer-bottom .social-icons a { width: 44px; height: 44px; }
+.footer-brand .social-icons a svg,
+.footer-bottom .social-icons a svg { width: 21px; height: 21px; }
+
+/* Contact destination cards: brand-coloured icon chips */
+.dest-card .dest-ic {
+  width: 44px;
+  height: 44px;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.dest-card .dest-ic svg { width: 21px; height: 21px; }
+.dest-card.soc-instagram .dest-ic { background: linear-gradient(45deg, #feda75 0%, #fa7e1e 30%, #d62976 60%, #962fbf 86%, #4f5bd5 100%); }
+.dest-card.soc-facebook .dest-ic { background: #1877f2; }
+.dest-card.soc-youtube .dest-ic { background: #ff0000; }
+.dest-card.soc-tiktok .dest-ic { background: #010101; }
+.dest-card.soc-discord .dest-ic { background: #5865f2; }
+.dest-card.soc-ebay .dest-ic { background: #0064d2; }
+.dest-card.soc-threads .dest-ic { background: #ffffff; color: #0a0a0a; }
+.dest-card.soc-whatsapp .dest-ic { background: #25d366; }
+.dest-card:focus-visible,
+a.category-card:focus-visible {
+  outline: 2px solid var(--blue-light);
+  outline-offset: 2px;
+}
+
+/* ---------- 2. Custom brand icon set (inline SVG sprite) ---------- */
+
+.uic { display: block; flex-shrink: 0; }
+.uic-inline { display: inline-block; vertical-align: -3px; width: 16px; height: 16px; }
+
+/* One rich chip treatment behind every custom icon */
+.category-card .icon,
+.feature .icon,
+.value-card .icon,
+.game-card .icon,
+.rotation-card .icon,
+.info-card .icon-sm {
+  background: linear-gradient(160deg, #262f57 0%, #131a38 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 10px 22px rgba(0, 0, 0, 0.32);
+  font-size: 0;
+}
+.category-card .icon .uic { width: 40px; height: 40px; }
+.feature .icon .uic { width: 40px; height: 40px; }
+.value-card .icon .uic,
+.game-card .icon .uic,
+.rotation-card .icon .uic { width: 36px; height: 36px; }
+.info-card .icon-sm .uic { width: 23px; height: 23px; }
+
+.product-photo-fallback .uic { width: 88px; height: 88px; }
+.product-price .uic-inline { margin-right: 3px; }
+.modal-text-link .uic-inline { width: 17px; height: 17px; margin-right: 2px; }
+
+/* ---------- 3. Whole-card click targets ---------- */
+
+.game-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247, 121, 30, 0.35);
+  box-shadow: var(--shadow-glow-orange);
+}
+.game-card .game-link::after,
+.rotation-card .game-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.game-card:focus-within,
+.rotation-card:focus-within {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+}
+
+/* GOAT Slabs: the whole figure opens the lightbox, not just the photo */
+.goat-card { position: relative; }
+.goat-photo { position: static; }
+.goat-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+.goat-inquire { position: relative; z-index: 2; }
+
+/* ---------- 5. Tightened cards ---------- */
+
+.category-card { padding: 28px 24px; }
+.category-card .icon { margin-bottom: 16px; }
+.category-card p { margin-bottom: 12px; }
+.game-card { padding: 26px; }
+.game-card .icon { margin-bottom: 14px; }
+.game-card .game-link { margin-top: 14px; }
+.value-card { padding: 26px; }
+.value-card .icon { margin-bottom: 14px; }
+.info-card { padding: 28px; margin-bottom: 16px; }
+.info-card h3 { margin-bottom: 12px; }
+.feature { padding: 24px 16px; }
+.feature .icon { margin-bottom: 14px; }
+.product-info { padding: 14px 16px 16px; }
+.goat-card figcaption { padding: 12px 14px 14px; }
+.dest-card { padding: 12px 14px; }
+
+/* ---------- 6. Friday game-night rotation (TCG page) ---------- */
+
+.rotation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.rotation-card {
+  position: relative;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.rotation-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247, 121, 30, 0.35);
+  box-shadow: var(--shadow-glow-orange);
+}
+.rotation-card .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.rotation-tag {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--gradient-brand);
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.rotation-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.rotation-card p { color: var(--grey); font-size: 0.93rem; flex-grow: 1; }
+.rotation-card .game-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 600;
+  color: var(--orange-light);
+  text-decoration: none;
+}
+.rotation-cycle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+.cycle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+.cycle-chip .uic { width: 20px; height: 20px; }
+.cycle-arrow { color: var(--orange-light); font-weight: 700; font-size: 1.05rem; }
+.rotation-note {
+  text-align: center;
+  color: var(--grey);
+  font-size: 0.93rem;
+  margin-top: 20px;
+}
+.rotation-note a { color: var(--orange-light); font-weight: 600; }
+@media (max-width: 700px) {
+  .rotation-grid { grid-template-columns: 1fr; }
+}
